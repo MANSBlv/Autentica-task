@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeLeaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<br>
+<br>
+
+<div class = "container">
+		<div class= "row">
+			<div class= "col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text center"> Create order </h1>
+				<div class = "card-body">
+				
+				<!-- create order page for the User     -->
+				
+					<form th:action="@{/createOrder}" th:object= "${createOrderedItems}" method="post">
+						<div class= "form-group">
+						
+							<label>Equipment</label>
+							<select class="form-control" th:field="*{items}" > 
+								<option  th:each="temp:${allItems}"
+								th:value="${temp.getEId}" 
+								
+								th:text="${temp.getEquipmentName} ?: 'default value'" > </option>
+							</select>
+						</div>
+						<div class= "form-group">
+						
+							<label>Parameters</label>
+							<select class="form-control" th:field="*{items}" > 
+								<option  th:each="temp:${allItems}"
+								th:value="${temp.getEId}" 
+								
+								th:text="${temp.getParameters} ?: 'default value'" > </option>
+							</select>
+						</div>
+						<div class= "form-group"> 
+							<label>Reason</label>
+							<input 
+							type= "text"
+							name="reason"
+							id="reason"
+							th:field="*{reason}"
+							class= "form-control"
+							placeholder="Enter reason"
+							/>
+							<p class="alert alert-danger" th:if="${#fields.hasErrors('reason')}" th:errors="*{reason}"/>
+						</div>
+						<div class="box-footer">
+						<button type= "submit" class = "btn btn-primary">
+						Submit
+						</button>
+						</div>
+					</form>
+					</tr>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
